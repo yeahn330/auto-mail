@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -15,6 +15,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function TablePaginationActions(props) {
@@ -78,13 +79,9 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(key, fr, subject, date) {
-  return { key, fr, subject, date };
-}
-
 export default function CustomPaginationActionsTable() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
   let [rows, setRows] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -102,7 +99,7 @@ export default function CustomPaginationActionsTable() {
           'http://127.0.0.1:5000/autoMail'
         );
         setRows(response.data); // 데이터는 response.data 안에 들어있습니다.
-        console.log(response.data)
+
       } catch (e) {
         setError(e);
       }
@@ -141,15 +138,19 @@ export default function CustomPaginationActionsTable() {
               <TableCell style={{ width: 160 }} align="left">
                 {row.fr}
               </TableCell>
+              <TableCell style={{ width: 160 }} align="left">
+                {row.selectMailboxKor}
+              </TableCell>
               <TableCell component="th" scope="row">
-                {row.subject}
+                <Link to={{ pathname: `/detail/${row.selectMailbox}/${row.uid}`}}>
+                  {row.subject}
+                </Link>
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
                 {row.date}
               </TableCell>
             </TableRow>
           ))}
-
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
               <TableCell colSpan={6} />
