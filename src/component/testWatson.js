@@ -53,7 +53,7 @@ export default function TestWatson(props){
             // loading 상태를 true 로 바꿉니다.
             setWLoading(true);
             const response = await axios.post(
-              'http://127.0.0.1:5000/watsonResult',
+              'http://139.150.73.246:5000/watsonResult',
               {
                 'watsonInput': propssss
               }

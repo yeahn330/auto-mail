@@ -34,7 +34,7 @@ export default function MailDetail(){
         // loading 상태를 true 로 바꿉니다.
         setLoading(true);
         const response = await axios.post(
-          'http://127.0.0.1:5000/autoMailDetail',
+          'http://139.150.73.246:5000/autoMailDetail',
           {
             'selectMailbox': param.selectMailbox,
             'uid': param.uid
