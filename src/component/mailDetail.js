@@ -75,7 +75,7 @@ export default function MailDetail(){
             <TableRow>
               <TableCell style={{ width: 160 }} align="left">
                 <Box>
-                  {detail.body.split(">")[0]==="<html" | detail.body.split("div")[0]==="<"
+                  {detail.body.split("html")[0]==="<" | detail.body.split("div")[0]==="<"
                   ?<div dangerouslySetInnerHTML={createMarkup(detail.body)} /> 
                   : detail.body.split("\n").map((line, index) => {
                     return (
